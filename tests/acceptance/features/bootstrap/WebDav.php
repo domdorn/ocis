@@ -810,6 +810,50 @@ trait WebDav {
 		$this->usingServer($previousServer);
 	}
 
+    public function isLikelyFile($name):bool{
+        $fileExtensions = ['jpg', 'png', 'txt', 'pdf'];  // Add more as needed
+
+        $extension = pathinfo($name, PATHINFO_EXTENSION);
+
+        return in_array($extension, $fileExtensions);
+    }
+
+    /**
+     * @Given user :user makes WebdAv request to :method from :source to :destination using :davpath davpath
+     */
+    public function userMakesWebdavRequestToFromToUsingFileid($user, $method, $source, $destination, $davpath)
+    {
+        $headers=[];
+        if ($this->isLikelyFile($destination)) {
+            $pathinfo = pathinfo($destination);
+            $headers['Destination'] = $this->getBaseUrl() .$davpath.$this->getFileIdForPath($user,dirname($destination))."/". $pathinfo['basename'];
+        } else {
+            var_dump(dirname($destination));
+            $headers['Destination'] = $this->getBaseUrl() .$davpath.$this->getFileIdForPath($user,dirname($destination))."/";
+        }
+if ($this->getFileIdForPath($user,$source)!== null ){
+    $url = $this->getBaseUrl(). $davpath.$this->getFileIdForPath($user,$source);
+} else{
+    $url = $this->getBaseUrl(). $davpath.$source;
+}
+
+        var_dump($url,$headers,$method);
+        $this->response = HttpRequestHelper::sendRequest(
+            $url,
+            $this->getStepLineRef(),
+            $method,
+            $this->getActualUsername($user),
+            $this->getUserPassword($user),
+            $headers
+        );
+        $this->setResponseXml(
+            HttpRequestHelper::parseResponseAsXml($this->response)
+        );
+        $this->pushToLastHttpStatusCodesArray(
+            (string) $this->getResponse()->getStatusCode()
+        );
+    }
+
 	/**
 	 * @When /^user "([^"]*)" copies (?:file|folder) "([^"]*)" to "([^"]*)" using the WebDAV API$/
 	 *
