@@ -1,3 +1,4 @@
+@skipOnStable
 Feature: Deprovisioning notification
   As a user admin
   I want to inform users about shutting down and deprovisioning the instance
