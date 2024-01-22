@@ -71,7 +71,7 @@ func DefaultConfig() *config.Config {
 					"X-HTTP-Method-Override",
 					"Cache-Control",
 				},
-				AllowCredentials: true,
+				AllowCredentials: false,
 			},
 		},
 		Service: config.Service{
