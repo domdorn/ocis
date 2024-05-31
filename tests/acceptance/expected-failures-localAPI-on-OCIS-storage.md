@@ -269,6 +269,7 @@ The expected failures in this file are from features in the owncloud/ocis repo.
 - [apiSharingNgLinkShare/linkShare.feature:2736](https://github.com/owncloud/ocis/blob/master/tests/acceptance/features/apiSharingNgLinkShare/linkShare.feature#L2736)
 - [apiSharingNgLinkShare/linkShare.feature:2804](https://github.com/owncloud/ocis/blob/master/tests/acceptance/features/apiSharingNgLinkShare/linkShare.feature#L2804)
 - [apiSharingNgLinkShare/linkShare.feature:2890](https://github.com/owncloud/ocis/blob/master/tests/acceptance/features/apiSharingNgLinkShare/linkShare.feature#L2890)
+- [apiSharingNgLinkShare/linkShare.feature:3277](https://github.com/owncloud/ocis/blob/master/tests/acceptance/features/apiSharingNgLinkShare/linkShare.feature#L3277)
 - [apiSharingNg/removeAccessToDriveItem.feature:125](https://github.com/owncloud/ocis/blob/master/tests/acceptance/features/apiSharingNg/removeAccessToDriveItem.feature#L125)
 - [apiSharingNg/removeAccessToDriveItem.feature:141](https://github.com/owncloud/ocis/blob/master/tests/acceptance/features/apiSharingNg/removeAccessToDriveItem.feature#L141)
 - [apiSharingNg/removeAccessToDriveItem.feature:161](https://github.com/owncloud/ocis/blob/master/tests/acceptance/features/apiSharingNg/removeAccessToDriveItem.feature#L161)
