@@ -2,7 +2,7 @@ package config
 
 // App defines the available app configuration.
 type App struct {
-	Name        string `yaml:"name" env:"COLLABORATION_APP_NAME" desc:"The name of the app" introductionVersion:"%%NEXT%%"`
+	Name        string `yaml:"name" env:"COLLABORATION_APP_NAME" desc:"The name of the app, either Collabora, OnlyOffice or Microsoft365" introductionVersion:"%%NEXT%%"`
 	Description string `yaml:"description" env:"COLLABORATION_APP_DESCRIPTION" desc:"App description" introductionVersion:"%%NEXT%%"`
 	Icon        string `yaml:"icon" env:"COLLABORATION_APP_ICON" desc:"Icon for the app" introductionVersion:"%%NEXT%%"`
 	LockName    string `yaml:"lockname" env:"COLLABORATION_APP_LOCKNAME" desc:"Name for the app lock" introductionVersion:"%%NEXT%%"`
