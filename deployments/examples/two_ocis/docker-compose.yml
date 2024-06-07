@@ -1,0 +1,217 @@
+---
+version: "3.7"
+
+services:
+  # ocis:
+  #   image: owncloud/ocis:${OCIS_DOCKER_TAG:-latest}
+  #   networks:
+  #     ocis-net:
+  #   entrypoint:
+  #     - /bin/sh
+  #   # run ocis init to initialize a configuration file with random secrets
+  #   # it will fail on subsequent runs, because the config file already exists
+  #   # therefore we ignore the error and then start the ocis server
+  #   command: ["-c", "ocis init || true; ocis server"]
+  #   environment:
+  #     OCIS_OIDC_ISSUER: https://${KEYCLOAK_DOMAIN:-keycloak.owncloud.test}/realms/${KEYCLOAK_REALM:-ocis}
+  #     OCIS_EDITION: "Enterprise"
+  #     PROXY_OIDC_REWRITE_WELLKNOWN: "true"
+  #     # users/groups from ldap
+  #     OCIS_LDAP_URI: ldaps://ldap-schule-1:1636
+  #     OCIS_LDAP_INSECURE: "true"
+  #     OCIS_LDAP_BIND_DN: "cn=admin,dc=owncloud,dc=com"
+  #     OCIS_LDAP_BIND_PASSWORD: ${LDAP_ADMIN_PASSWORD:-qTTKyTaokaFP6CYmGYJr}
+  #     OCIS_LDAP_GROUP_BASE_DN: "dc=owncloud,dc=com"
+  #     OCIS_LDAP_GROUP_FILTER: "(objectclass=owncloud)"
+  #     OCIS_LDAP_GROUP_OBJECTCLASS: "groupOfNames"
+  #     OCIS_LDAP_USER_BASE_DN: "ou=users,dc=owncloud,dc=com"
+  #     OCIS_LDAP_USER_FILTER: "(objectclass=owncloud)"
+  #     OCIS_LDAP_USER_OBJECTCLASS: "inetOrgPerson"
+  #     OCIS_LDAP_LOGIN_ATTRIBUTES: "uid"
+  #     OCIS_ADMIN_USER_ID: "ddc2004c-0977-11eb-9d3f-a793888cd0f8"
+  #     OCIS_SERVICE_ACCOUNT_ID: "a7482719-da5d-4d32-9e6f-039593d4dfd4"
+  #     OCIS_SERVICE_ACCOUNT_SECRET: "PmfsAEzfLrL9mTg9"
+  #     IDP_LDAP_LOGIN_ATTRIBUTE: "uid"
+  #     IDP_LDAP_UUID_ATTRIBUTE: "ownclouduuid"
+  #     IDP_LDAP_UUID_ATTRIBUTE_TYPE: binary
+  #     GRAPH_LDAP_GROUP_CREATE_BASE_DN: "ou=groups,ou=local,dc=owncloud,dc=com"
+  #     OCIS_LDAP_SERVER_WRITE_ENABLED: "false"
+  #     GRAPH_LDAP_REFINT_ENABLED: "true" # osixia has refint enabled.
+  #     GRAPH_APPLICATION_ID: "16c04153-8b1b-493b-bf10-0f4762d60b5a" # school ID
+  #     GRAPH_APPLICATION_DISPLAYNAME: "School Derby Center"
+  #     OCIS_ADD_RUN_SERVICES: "policies"
+  #     OCIS_URL: https://${OCIS_DOMAIN_1:-ocis.owncloud.test}
+  #     OCIS_LOG_LEVEL: ${OCIS_LOG_LEVEL:-info}
+  #     OCIS_LOG_COLOR: "${OCIS_LOG_COLOR:-true}"
+  #     OCIS_SPACES_MAX_QUOTA: "250000000000"
+  #     PROXY_TLS: "false" # do not use SSL between Traefik and oCIS
+  #     PROXY_USER_OIDC_CLAIM: "ocis.user.uuid"
+  #     PROXY_USER_CS3_CLAIM: "userid"
+  #     PROXY_ROLE_ASSIGNMENT_DRIVER: "oidc"
+  #     GATEWAY_GRPC_ADDR: 0.0.0.0:9142 # make the REVA gateway accessible to the app drivers
+  #     # INSECURE: needed if oCIS / Traefik is using self generated certificates
+  #     OCIS_INSECURE: "${INSECURE:-false}"
+  #     # basic auth (not recommended, but needed for eg. WebDav clients that do not support OpenID Connect)
+  #     PROXY_ENABLE_BASIC_AUTH: "${PROXY_ENABLE_BASIC_AUTH:-false}"
+  #     PROXY_POLICIES_QUERY: "data.proxy.granted"
+  #     PROXY_DEBUG_ADDR: 0.0.0.0:9205
+  #     # fulltext search
+  #     SEARCH_EXTRACTOR_TYPE: tika
+  #     SEARCH_EXTRACTOR_TIKA_TIKA_URL: http://tika:9998
+  #     # email server (in this case inbucket acts as mail catcher)
+  #     NOTIFICATIONS_SMTP_HOST: inbucket
+  #     NOTIFICATIONS_SMTP_PORT: 2500
+  #     NOTIFICATIONS_SMTP_SENDER: oCIS notifications <notifications@${OCIS_DOMAIN_1:-ocis.owncloud.test}>
+  #     NOTIFICATIONS_SMTP_USERNAME: notifications@${OCIS_DOMAIN_1:-ocis.owncloud.test}
+  #     NOTIFICATIONS_SMTP_INSECURE: true # the mail catcher uses self signed certificates
+  #     SETTINGS_BUNDLES_PATH: "/etc/ocis/bundles.json"
+  #     OCIS_DECOMPOSEDFS_METADATA_BACKEND: "messagepack"
+  #     OCIS_SHARING_PUBLIC_WRITEABLE_SHARE_MUST_HAVE_PASSWORD: "true"
+  #     OCIS_OIDC_CLIENT_ID: "web-0001"
+  #     OCIS_LDAP_DISABLE_USER_MECHANISM: group
+  #     OCIS_LDAP_DISABLED_USERS_GROUP_DN: "cn=DisabledUsersGroup,ou=groups,ou=local,dc=owncloud,dc=com"
+  #     OCIS_ASYNC_UPLOADS: "true"
+  #     POSTPROCESSING_STEPS: "virusscan"
+  #     #POLICIES_POSTPROCESSING_QUERY: "data.postprocessing.granted"
+  #     #POSTPROCESSING_DELAY: "5s"
+  #     STORAGE_USERS_DATA_GATEWAY_URL: http://ocis:9200/data
+  #     FRONTEND_ENABLE_RESHARING: "false"
+  #     FRONTEND_SEARCH_MIN_LENGTH: 2
+  #     FRONTEND_UPLOAD_MAX_CHUNK_SIZE: 1000000
+  #     FRONTEND_READONLY_USER_ATTRIBUTES: "user.onPremisesSamAccountName,user.displayName,user.mail,user.passwordProfile,user.appRoleAssignments"
+  #     FRONTEND_FULL_TEXT_SEARCH_ENABLED: "true"
+  #     GRAPH_KEYCLOAK_BASE_PATH: https://${KEYCLOAK_DOMAIN:-keycloak.owncloud.test}
+  #     GRAPH_KEYCLOAK_CLIENT_ID: "ocis-1-pdata"
+  #     GRAPH_KEYCLOAK_CLIENT_SECRET: "k2iHTmq60QWNkta1y4jAZdK8KmrCfigT"
+  #     GRAPH_KEYCLOAK_CLIENT_REALM: "master"
+  #     GRAPH_KEYCLOAK_USER_REALM: "ocis"
+  #      # make the registry available to the app provider containers
+  #     MICRO_REGISTRY_ADDRESS: 127.0.0.1:9233
+  #     NATS_NATS_HOST: 0.0.0.0
+  #     NATS_NATS_PORT: 9233
+  #   volumes:
+  #     - ./config/ocis/app-registry.yaml:/etc/ocis/app-registry.yaml
+  #     - ./config/ocis/bundles.json:/etc/ocis/bundles.json
+  #     - ./config/ocis/web.yaml:/etc/ocis/web.yaml
+  #     - ./config/ocis/proxy.yaml:/etc/ocis/proxy.yaml
+  #     - ./config/ocis/themes/owncloud:/var/lib/ocis/web/assets/themes/owncloud
+  #     - ./config/ocis/policies.yaml:/etc/ocis/policies.yaml
+  #     - ./config/ocis/policies/:/etc/ocis/policies
+  #     - ocis-web-assets:/var/lib/ocis/web/assets
+  #     - ocis-config:/etc/ocis
+  #     - ocis-data:/var/lib/ocis
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.ocis.entrypoints=https"
+  #     - "traefik.http.routers.ocis.rule=Host(`${OCIS_DOMAIN_1:-ocis.owncloud.test}`)"
+  #     - "traefik.http.routers.ocis.tls.certresolver=http"
+  #     - "traefik.http.routers.ocis.service=ocis"
+  #     - "traefik.http.services.ocis.loadbalancer.server.port=9200"
+  #   logging:
+  #     driver: ${LOG_DRIVER:-local}
+  #   restart: always
+  
+  ocis-1:
+    image: owncloud/ocis:${OCIS_DOCKER_TAG:-latest}
+    networks:
+      ocis-net:
+    entrypoint:
+      - /bin/sh
+    # run ocis init to initialize a configuration file with random secrets
+    # it will fail on subsequent runs, because the config file already exists
+    # therefore we ignore the error and then start the ocis server
+    command: ["-c", "ocis init || true; ocis server"]
+    ports:
+      - "10200:9200"
+    environment:
+      # users/gropups from ldap
+      OCIS_ASYNC_UPLOADS: "true"
+      OCIS_JWT_SECRET: "some-ocis-jwt-secret"
+      OCIS_URL: https://ocis-1:10200
+      OCIS_CORS_ALLOW_ORIGINS: https://ocis-1:10200
+      OCIS_LOG_LEVEL: ${OCIS_LOG_LEVEL:-error}
+      OCIS_LOG_COLOR: "${OCIS_LOG_COLOR:-true}"
+      OCIS_SPACES_MAX_QUOTA: "250000000000"
+      OCIS_INSECURE: "true"
+      # basic auth (not recommended, but needed for eg. WebDav clients that do not support OpenID Connect)
+      PROXY_ENABLE_BASIC_AUTH: "true"
+      IDM_CREATE_DEMO_USERS: "true"
+      IDM_ADMIN_PASSWORD: "admin"
+      FRONTEND_ENABLE_RESHARING: "false"
+      FRONTEND_SEARCH_MIN_LENGTH: 2
+      MICRO_REGISTRY_ADDRESS: 127.0.0.1:9233
+      NATS_NATS_HOST: 0.0.0.0
+      NATS_NATS_PORT: 9233
+    volumes:
+      - ./config/ocis/app-registry.yaml:/etc/ocis/app-registry.yaml
+      - ./config/ocis/web.yaml:/etc/ocis/web.yaml
+      - ./config/ocis/csp.yaml:/etc/ocis/csp.yaml
+      - ocis-config-1:/etc/ocis
+      - ocis-data-1:/var/lib/ocis
+    logging:
+      driver: ${LOG_DRIVER:-local}
+    restart: always
+
+  ocis-2:
+    image: owncloud/ocis:${OCIS_DOCKER_TAG:-latest}
+    networks:
+      ocis-net:
+    entrypoint:
+      - /bin/sh
+    # run ocis init to initialize a configuration file with random secrets
+    # it will fail on subsequent runs, because the config file already exists
+    # therefore we ignore the error and then start the ocis server
+    command: ["-c", "ocis init || true; ocis server"]
+    ports:
+      - "9200:9200"
+    environment:
+      # users/gropups from ldap
+      OCIS_ASYNC_UPLOADS: "true"
+      OCIS_JWT_SECRET: "some-ocis-jwt-secret"
+      OCIS_URL: https://ocis-2:9200
+      OCIS_LOG_LEVEL: ${OCIS_LOG_LEVEL:-error}
+      OCIS_LOG_COLOR: "${OCIS_LOG_COLOR:-true}"
+      OCIS_SPACES_MAX_QUOTA: "250000000000"
+      OCIS_INSECURE: "true"
+      # basic auth (not recommended, but needed for eg. WebDav clients that do not support OpenID Connect)
+      PROXY_ENABLE_BASIC_AUTH: "true"
+      IDM_CREATE_DEMO_USERS: "true"
+      IDM_ADMIN_PASSWORD: "admin"
+      FRONTEND_ENABLE_RESHARING: "false"
+      FRONTEND_SEARCH_MIN_LENGTH: 2
+      MICRO_REGISTRY_ADDRESS: 127.0.0.1:9233
+      NATS_NATS_HOST: 0.0.0.0
+      NATS_NATS_PORT: 9233
+    volumes:
+      - ./config/ocis/app-registry.yaml:/etc/ocis/app-registry.yaml
+      - ./config/ocis/web.yaml:/etc/ocis/web.yaml
+      - ./config/ocis/csp.yaml:/etc/ocis/csp.yaml
+      - ocis-config-2:/etc/ocis
+      - ocis-data-2:/var/lib/ocis
+    logging:
+      driver: ${LOG_DRIVER:-local}
+    restart: always
+
+
+
+volumes:
+  certs:
+  ocis-config:
+  ocis-data:
+  ocis-web-assets:
+  ocis-config-1:
+  ocis-data-1:
+  ocis-config-2:
+  ocis-data-2:
+  ocis-web-assets-2:
+  wopi-recovery:
+  ldap-certs:
+  keycloak_postgres_data:
+  central-ldap-data:
+  schule-1-ldap-data:
+  schule-2-ldap-data:
+  companion-data:
+  loki_data:
+
+networks:
+  ocis-net:

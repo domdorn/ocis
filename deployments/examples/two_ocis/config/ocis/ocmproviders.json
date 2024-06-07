@@ -1,0 +1,74 @@
+[
+  {
+      "name": "oCIS Test",
+      "full_name": "oCIS Test provider",
+      "organization": "oCIS",
+      "domain": "cloud.ocis.test",
+      "homepage": "https://localhost:9200",
+  "description": "oCIS Example cloud storage",
+      "services": [
+          {
+              "endpoint": {
+                  "type": {
+                      "name": "OCM",
+                      "description": "cloud.ocis.test Open Cloud Mesh API"
+                  },
+                  "name": "cloud.ocis.test - OCM API",
+                  "path": "https://localhost:9200/ocm/",
+                  "is_monitored": true
+              },
+              "api_version": "0.0.1",
+              "host": "https://localhost:9200"
+          },
+    {
+      "endpoint": {
+        "type": {
+          "name": "Webdav",
+          "description": "cloud.ocis.test Webdav API"
+        },
+        "name": "cloud.ocis.test Example - Webdav API",
+        "path": "https://localhost:9200/dav/",
+        "is_monitored": true
+      },
+      "api_version": "0.0.1",
+      "host": "https://localhost:9200/"
+    }
+      ]
+  },
+{
+      "name": "ownCloud Test",
+      "full_name": "ownCloud Test provider",
+      "organization": "ownCloud",
+      "domain": "cloud.owncloud.test",
+      "homepage": "https://ocis.owncloud.test",
+  "description": "ownCloud Example cloud storage",
+  "services": [
+          {
+              "endpoint": {
+                  "type": {
+                      "name": "OCM",
+                      "description": "cloud.owncloud.test Open Cloud Mesh API"
+                  },
+                  "name": "cloud.owncloud.test - OCM API",
+                  "path": "https://ocis.owncloud.test/ocm/",
+                  "is_monitored": true
+              },
+              "api_version": "0.0.1",
+              "host": "https://ocis.owncloud.test/"
+          },
+    {
+      "endpoint": {
+        "type": {
+          "name": "Webdav",
+          "description": "cloud.owncloud.test Webdav API"
+        },
+        "name": "cloud.owncloud.test Example - Webdav API",
+        "path": "https://ocis.owncloud.test/dav/",
+        "is_monitored": true
+      },
+      "api_version": "0.0.1",
+      "host": "https://ocis.owncloud.test/"
+    }
+  ]
+}
+]
