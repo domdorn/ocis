@@ -84,6 +84,7 @@ default:
         - FilesVersionsContext:
         - OCSContext:
         - PublicWebDavContext:
+        - WebDavPropertiesContext:
         - SearchContext:
         - TUSContext:
         - SpacesTUSContext:

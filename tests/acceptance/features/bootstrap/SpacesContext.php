@@ -3506,7 +3506,9 @@ class SpacesContext implements Context {
 		TableNode $propertiesTable
 	):void {
 		$this->setSpaceIDByName($user, $spaceName);
+		sleep(2);
 		$response = $this->webDavPropertiesContext->getPropertiesOfFolder($user, $resourceName, $propertiesTable);
+		var_dump($response->getBody()->getContents());
 		$this->featureContext->setResponse($response);
 	}
 
